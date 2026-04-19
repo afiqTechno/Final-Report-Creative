@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynaTech-DTS Internship Report - Live Sync</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <link rel="icon" href="dts_org_chart.png">
+    <style>
+        :root { 
+            --primary: #0e3e89; 
+            --bg: #01B6BE; 
+            --text: #1e293b; 
+        }
+        
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            padding: 40px 20px; 
+            margin: 0;
+        }
+
+        h1 { 
+            text-align: center; 
+            margin-bottom: 30px; 
+            color: white; /* Changed to white to pop against your teal background */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .main-wrapper { 
+            max-width: 1100px; 
+            margin: 0 auto; 
+        }
+
+        .container { 
+            display: flex; 
+            gap: 30px; 
+            align-items: flex-start; /* Prevents the panel from stretching weirdly */
+        }
+
+        /* Fixed Aside: Ensures the calendar stays a consistent size */
+        aside { 
+            flex: 0 0 400px; /* Do not grow, do not shrink, stay at 400px width */
+        }
+
+        .calendar-card, .report-panel { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); 
+        }
+
+        .report-panel { 
+            flex: 1; /* This takes up all the remaining space */
+            min-height: 450px; 
+        }
+
+        /* --- FIXED CALENDAR STYLES --- */
+        .calendar-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin-bottom: 20px; }
+        .calendar-header button { background: #6193c5; color: white; border: none; padding: 5px 15px; border-radius: 6px; cursor: pointer; font-size: 1.5rem; line-height: 1; }
+        .calendar-header button:hover { background: var(--primary); }
+
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+        .day-name { text-align: center; font-size: 0.8rem; color: #64748b; font-weight: bold; }
+        
+        .day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 8px; border: 1px solid #e2e8f0; position: relative; }
+        .day:hover { background: #eff6ff; }
+
+        /* DOTS LOGIC */
+        .day.status-done::after, 
+        .day.status-empty::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            width: 30px; /* Fixed size */
+            height: 6px; /* Fixed size */
+            border-radius: 50%;
+        }
+
+        .day.status-done::after { background: #22c55e; } /* Green */
+        .day.status-empty::after { background: #ef4444; opacity: 0.5; } /* Red */
+        
+        .day.active { background: var(--primary) !important; color: white !important; font-weight: bold; transform: scale(1.05); z-index: 2; }
+        
+        .tag { display: inline-block; background: #dbeafe; color: #1e40af; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; margin-top: 10px; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <h1>MY Internship Report at DynaTech</h1>
+
+        <div class="container">
+            <aside>
+                <div class="calendar-card">
+                    <div class="calendar-header" id="headerUI"></div>
+                    <div id="loading">Loading reports from Google Sheets...</div>
+                    <div class="calendar-grid" id="calendarGrid" style="display:none;"></div>
+                </div>
+            </aside>
+            
+            <div class="report-panel">
+                <div id="defaultMsg">Click a marked date to view report</div>
+                <div id="reportContent" style="display:none;">
+                    <div id="viewDate" style="color:#64748b; font-size:0.9rem;"></div>
+                    <h2 id="viewTitle" style="margin-top:5px;"></h2>
+                    <p id="viewText"></p>
+                    <div id="viewTags"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. SETTINGS
+        const SPREADSHEET_ID = '1n5Lw9KfpD_8xi1ANdtc0jw1RKPhQuXhdDB3qui-E5GM';
+        const SHEET_NAME = 'Sheet1'; 
+
+        let reports = {};
+        // Get memory from storage
+        let currentMonth = parseInt(localStorage.getItem('savedMonth')) || new Date().getMonth();
+        let currentYear = parseInt(localStorage.getItem('savedYear')) || new Date().getFullYear();
+        let lastSelectedDate = localStorage.getItem('lastDate') || null; 
+
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        // 2. FETCH DATA
+        async function loadData() {
+            const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${SHEET_NAME}&t=${new Date().getTime()}`;
+
+            try {
+                const response = await fetch(url);
+                const csvText = await response.text();
+                reports = {};
+
+                Papa.parse(csvText, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: (results) => {
+                        results.data.forEach(row => {
+                            const cleanDate = row.Date ? row.Date.replace(/['"]+/g, '').trim() : null;
+                            if(cleanDate) {
+                                reports[cleanDate] = {
+                                    title: row.Title,
+                                    text: row.Text,
+                                    tags: row.Tags ? row.Tags.split(',') : []
+                                };
+                            }
+                        });
+                        // Build the calendar first
+                        renderCalendar();
+                        // Then fill the text panel if we have a saved date
+                        if (lastSelectedDate) {
+                            updateTextPanel(lastSelectedDate);
+                        }
+                    }
+                });
+            } catch (error) {
+                document.getElementById('loading').innerText = "Error loading data.";
+            }
+        }
+
+        // 3. RENDER CALENDAR (This now handles highlighting perfectly)
+        function renderCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            const headerUI = document.getElementById('headerUI');
+            
+            localStorage.setItem('savedMonth', currentMonth);
+            localStorage.setItem('savedYear', currentYear);
+
+            headerUI.innerHTML = `
+                <button onclick="changeMonth(-1)">❮</button>
+                <span>${monthNames[currentMonth]} ${currentYear}</span>
+                <button onclick="changeMonth(1)">❯</button>
+            `;
+
+            grid.innerHTML = `
+                <div class="day-name">Sun</div><div class="day-name">Mon</div><div class="day-name">Tue</div>
+                <div class="day-name">Wed</div><div class="day-name">Thu</div><div class="day-name">Fri</div>
+                <div class="day-name">Sat</div>
+            `;
+
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) grid.innerHTML += `<div></div>`;
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                const dayEl = document.createElement('div');
+                
+                // CHECK: Is this the date we should highlight?
+                const isSelected = (dateStr === lastSelectedDate);
+                const hasData = reports[dateStr];
+
+                // Logic: 
+                // If there is data -> 'status-done'
+                // If no data AND it's between Jan-May 2026 -> 'status-empty'
+                let statusClass = '';
+                if (hasData) {
+                    statusClass = 'status-done';
+                } else if (currentYear === 2026 && currentMonth >= 0 && currentMonth <= 4) {
+                    statusClass = 'status-empty';
+                }
+                
+                dayEl.className = `day ${statusClass} ${isSelected ? 'active' : ''}`;
+                dayEl.innerText = d;
+                
+                dayEl.onclick = () => {
+                    // Remove highlight from all other days
+                    document.querySelectorAll('.day').forEach(el => el.classList.remove('active'));
+                    // Add highlight to this day
+                    dayEl.classList.add('active');
+                    // Save and update
+                    lastSelectedDate = dateStr;
+                    localStorage.setItem('lastDate', dateStr);
+                    updateTextPanel(dateStr);
+                };
+                grid.appendChild(dayEl);
+            }
+            
+            document.getElementById('loading').style.display = 'none';
+            grid.style.display = 'grid';
+        }
+
+        // 4. NAVIGATION
+        function changeMonth(diff) {
+            currentMonth += diff;
+            
+            // Logic to handle year change
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+
+            // Optional: Keep the user within your internship window (Jan 2026 - May 2026)
+            // This prevents them from clicking into empty months
+            if (currentYear === 2026 && currentMonth > 4) { // 4 is May
+                currentMonth = 4; 
+            }
+            if (currentYear < 2026) {
+                currentYear = 2026;
+                currentMonth = 0; // 0 is Jan
+            }
+
+            renderCalendar();
+        }
+
+        // 5. UPDATE TEXT PANEL (Separated from the visual highlight logic)
+        function updateTextPanel(dateStr) {
+            const data = reports[dateStr];
+            const content = document.getElementById('reportContent');
+            const defaultMsg = document.getElementById('defaultMsg');
+
+            if (data) {
+                defaultMsg.style.display = 'none';
+                content.style.display = 'block';
+                document.getElementById('viewDate').innerText = dateStr;
+                document.getElementById('viewTitle').innerText = data.title;
+                document.getElementById('viewText').innerText = data.text;
+                document.getElementById('viewTags').innerHTML = data.tags.map(t => `<span class="tag">${t.trim()}</span>`).join('');
+            } else {
+                defaultMsg.style.display = 'block';
+                defaultMsg.innerText = "No report for " + dateStr;
+                content.style.display = 'none';
+            }
+        }
+
+        loadData();
+    </script>
+</body>
+</html>
