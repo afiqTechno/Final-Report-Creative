@@ -4,44 +4,403 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INDUSTRIAL TRAINING FINAL REPORT - Weekly Summary</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             background-color: #f8f9fa;
             font-family: 'Inter', sans-serif;
         }
-        .sidebar {
+        .sidebar-permanent {
             background: #ffffff;
             min-height: 100vh;
             border-right: 1px solid #dee2e6;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            z-index: 1;
         }
         .content-area {
             padding: 40px;
         }
+        .nav-link.active {
+            background-color: #0d6efd;
+            color: white !important;
+            border-radius: 4px;
+        }
+        .week-section {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #0d6efd;
+        }
+        .week-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+        .week-number {
+            background: #0d6efd;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .week-title {
+            color: #333;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+        }
+        .period {
+            font-size: 14px;
+            color: #6c757d; 
+            margin-left: auto;
+        }
+        .img-placeholder {
+            background: #e9ecef;
+            border: 2px dashed #adb5bd;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin: 20px 0;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .week-description {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: justify;
+            overflow-wrap: break-word;
+        }
+        hr {
+            margin: 30px 0;
+            border: none;
+            border-top: 1px solid #dee2e6;
+        }
     </style>
 </head>
-<body>
+<body>    
+    <!-- Mobile Folding Navbar -->
+    <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom d-md-none sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">INDUSTRIAL TRAINING FINAL REPORT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mobileMenu">
+                <ul class="navbar-nav pt-2">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="company_bg.html">Company's Background</a></li>
+                    <li class="nav-item"><a class="nav-link" href="executive_summary.html">Executive Summary</a></li>
+                    <li class="nav-item"><a class="nav-link active">Weekly Summary</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <div class="container-fluid">
         <div class="row">
-            <nav class="col-md-2 sidebar d-none d-md-block">
-                <h5 class="p-3">INDUSTRIAL TRAINING</h5>
-                <ul class="nav flex-column">
+            <nav class="col-md-2 d-none d-md-block sidebar-permanent">
+                <h5 class="p-3">INDUSTRIAL TRAINING FINAL REPORT</h5>
+                <ul class="nav flex-column px-2">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="company_bg.html">Company's Background</a></li>
                     <li class="nav-item"><a class="nav-link" href="executive_summary.html">Executive Summary</a></li>
-                    <li class="nav-item"><a class="nav-link disabled" href="weekly_summary.html">Weekly Summary</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">Weekly Summary</a>
+                        <ul class="dropdown-menu show">
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-1">Week 1</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-2">Week 2</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-3">Week 3</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-4">Week 4</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-5">Week 5</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-6">Week 6</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-7">Week 7</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-8">Week 8</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-9">Week 9</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-10">Week 10</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-11">Week 11</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-12">Week 12</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-13">Week 13</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-14">Week 14</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-15">Week 15</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-16">Week 16</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-17">Week 17</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-18">Week 18</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-19">Week 19</a></li>
+                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-20">Week 20</a></li>
+                            <br>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
 
-            <main class="col-md-10 content-area">
+            <main class="col-md-10 offset-md-2 content-area">
                 <section>
                     <h1>WEEKLY SUMMARY</h1>
                     <hr>
                     
+                    <!-- Week 1 -->
+                    <div class="week-section" id="week-1">
+                        <div class="week-header">
+                            <div class="week-number">1</div>
+                            <h3 class="week-title">Orientation & Company Introduction</h3>
+                            <br>
+                            <p class="period">5 January - 9 January</p>
+                        </div>
+                        <div class="img-placeholder">Upload your week 1 image here</div>
+                        <p class="week-description">
+                            Week 1 was focused on orientation and getting acquainted with the company environment. I was introduced to the company culture, met with team members, and learned about the organizational structure. I completed all necessary onboarding procedures and set up my workstation. This week helped me understand the company's mission, vision, and values.
+                        </p>
+                    </div>
+
+                    <!-- Week 2 -->
+                    <div class="week-section" id="week-2">
+                        <div class="week-header">
+                            <div class="week-number">2</div>
+                            <h3 class="week-title">Project Requirements & Planning</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 2 image here</div>
+                        <p class="week-description">
+                            During week 2, I participated in detailed project planning sessions. We discussed the project requirements, timelines, and deliverables. I learned about the technology stack being used and started familiarizing myself with the project documentation. This week was crucial in understanding what we need to accomplish.
+                        </p>
+                    </div>
+
+                    <!-- Week 3 -->
+                    <div class="week-section" id="week-3">
+                        <div class="week-header">
+                            <div class="week-number">3</div>
+                            <h3 class="week-title">Development Environment Setup</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 3 image here</div>
+                        <p class="week-description">
+                            Week 3 involved setting up all necessary development tools and environments. I installed required software, configured version control systems, and set up my development IDE. This week prepared me for the actual coding tasks that would follow in the coming weeks.
+                        </p>
+                    </div>
+
+                    <!-- Week 4 -->
+                    <div class="week-section" id="week-4">
+                        <div class="week-header">
+                            <div class="week-number">4</div>
+                            <h3 class="week-title">Backend Development - Phase 1</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 4 image here</div>
+                        <p class="week-description">
+                            In week 4, I started backend development work. I created the initial project structure and began implementing core APIs. I worked on database schema design and started writing the first set of API endpoints. This week marked the beginning of actual coding contributions to the project.
+                        </p>
+                    </div>
+
+                    <!-- Week 5 -->
+                    <div class="week-section" id="week-5">
+                        <div class="week-header">
+                            <div class="week-number">5</div>
+                            <h3 class="week-title">Backend Development - Phase 2</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 5 image here</div>
+                        <p class="week-description">
+                            Week 5 continued backend development with more complex features. I implemented authentication and authorization mechanisms, added data validation, and created additional API endpoints. I also started writing unit tests for the components I developed.
+                        </p>
+                    </div>
+
+                    <!-- Week 6 -->
+                    <div class="week-section" id="week-6">
+                        <div class="week-header">
+                            <div class="week-number">6</div>
+                            <h3 class="week-title">Frontend Development - Phase 1</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 6 image here</div>
+                        <p class="week-description">
+                            During week 6, I transitioned to frontend development. I created the basic UI components and started building the user interface according to the design mockups. I learned about responsive design principles and implemented them in the application.
+                        </p>
+                    </div>
+
+                    <!-- Week 7 -->
+                    <div class="week-section" id="week-7">
+                        <div class="week-header">
+                            <div class="week-number">7</div>
+                            <h3 class="week-title">Frontend Development - Phase 2</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 7 image here</div>
+                        <p class="week-description">
+                            Week 7 saw me continuing frontend work with more advanced features. I integrated the frontend with backend APIs, implemented state management, and added client-side validation. The application started to look and function like a complete product.
+                        </p>
+                    </div>
+
+                    <!-- Week 8 -->
+                    <div class="week-section" id="week-8">
+                        <div class="week-header">
+                            <div class="week-number">8</div>
+                            <h3 class="week-title">Testing & Quality Assurance</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 8 image here</div>
+                        <p class="week-description">
+                            In week 8, I focused on testing and quality assurance. I created test cases, performed manual testing, and identified bugs. I also set up automated testing pipelines and worked on improving code quality through code reviews.
+                        </p>
+                    </div>
+
+                    <!-- Week 9 -->
+                    <div class="week-section" id="week-9">
+                        <div class="week-header">
+                            <div class="week-number">9</div>
+                            <h3 class="week-title">Bug Fixes & Optimization</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 9 image here</div>
+                        <p class="week-description">
+                            Week 9 was dedicated to fixing bugs found during testing and optimizing the application. I improved database queries, optimized frontend performance, and addressed all critical issues. The application was now much more stable and efficient.
+                        </p>
+                    </div>
+
+                    <!-- Week 10 -->
+                    <div class="week-section" id="week-10">
+                        <div class="week-header">
+                            <div class="week-number">10</div>
+                            <h3 class="week-title">Documentation & Knowledge Transfer</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 10 image here</div>
+                        <p class="week-description">
+                            During week 10, I documented all aspects of the project including API documentation, user manual, and technical specifications. I also began knowledge transfer sessions with team members to ensure they understand the implemented features.
+                        </p>
+                    </div>
+
+                    <!-- Week 11 -->
+                    <div class="week-section" id="week-11">
+                        <div class="week-header">
+                            <div class="week-number">11</div>
+                            <h3 class="week-title">Deployment Preparation</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 11 image here</div>
+                        <p class="week-description">
+                            In week 11, we prepared for deployment. I set up production environment configurations, created deployment scripts, and performed final testing on the staging environment. Everything was ready for the production release.
+                        </p>
+                    </div>
+
+                    <!-- Week 12 -->
+                    <div class="week-section" id="week-12">
+                        <div class="week-header">
+                            <div class="week-number">12</div>
+                            <h3 class="week-title">Production Deployment</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 12 image here</div>
+                        <p class="week-description">
+                            Week 12 marked the official deployment to production. I assisted in the deployment process and monitored the application for any issues. The successful deployment was a major milestone for the project.
+                        </p>
+                    </div>
+
+                    <!-- Week 13 -->
+                    <div class="week-section" id="week-13">
+                        <div class="week-header">
+                            <div class="week-number">13</div>
+                            <h3 class="week-title">Post-Deployment Monitoring</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 13 image here</div>
+                        <p class="week-description">
+                            During week 13, I monitored the production application closely for any performance issues or bugs. I set up monitoring and alerting systems to catch problems early. Several minor issues were identified and fixed quickly.
+                        </p>
+                    </div>
+
+                    <!-- Week 14 -->
+                    <div class="week-section" id="week-14">
+                        <div class="week-header">
+                            <div class="week-number">14</div>
+                            <h3 class="week-title">Feature Enhancement - Phase 1</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 14 image here</div>
+                        <p class="week-description">
+                            Week 14 involved implementing additional features based on user feedback and business requirements. I developed new functionality while maintaining the stability of existing features. The application continued to improve.
+                        </p>
+                    </div>
+
+                    <!-- Week 15 -->
+                    <div class="week-section" id="week-15">
+                        <div class="week-header">
+                            <div class="week-number">15</div>
+                            <h3 class="week-title">Feature Enhancement - Phase 2</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 15 image here</div>
+                        <p class="week-description">
+                            During week 15, I continued enhancing the application with more advanced features. I worked on improving user experience and adding functionalities that were requested by stakeholders. The application became more powerful and user-friendly.
+                        </p>
+                    </div>
+
+                    <!-- Week 16 -->
+                    <div class="week-section" id="week-16">
+                        <div class="week-header">
+                            <div class="week-number">16</div>
+                            <h3 class="week-title">Security Audit & Implementation</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 16 image here</div>
+                        <p class="week-description">
+                            In week 16, I conducted a comprehensive security audit of the application. I identified potential vulnerabilities and implemented security patches. I also improved authentication mechanisms and data encryption standards to protect user information.
+                        </p>
+                    </div>
+
+                    <!-- Week 17 -->
+                    <div class="week-section" id="week-17">
+                        <div class="week-header">
+                            <div class="week-number">17</div>
+                            <h3 class="week-title">Performance Optimization</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 17 image here</div>
+                        <p class="week-description">
+                            Week 17 focused on optimizing application performance. I analyzed load times, optimized database queries, implemented caching mechanisms, and reduced the bundle size of frontend assets. The application became significantly faster.
+                        </p>
+                    </div>
+
+                    <!-- Week 18 -->
+                    <div class="week-section" id="week-18">
+                        <div class="week-header">
+                            <div class="week-number">18</div>
+                            <h3 class="week-title">Team Collaboration & Mentoring</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 18 image here</div>
+                        <p class="week-description">
+                            During week 18, I collaborated closely with team members and helped mentor junior developers. I shared knowledge about the project architecture, best practices, and technical solutions. This collaborative work strengthened the team.
+                        </p>
+                    </div>
+
+                    <!-- Week 19 -->
+                    <div class="week-section" id="week-19">
+                        <div class="week-header">
+                            <div class="week-number">19</div>
+                            <h3 class="week-title">Final Review & Presentation</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 19 image here</div>
+                        <p class="week-description">
+                            Week 19 involved conducting a final review of all work completed during the internship. I prepared presentation materials and demonstrated the project to stakeholders. The feedback received was positive and encouraging.
+                        </p>
+                    </div>
+
+                    <!-- Week 20 -->
+                    <div class="week-section" id="week-20">
+                        <div class="week-header">
+                            <div class="week-number">20</div>
+                            <h3 class="week-title">Internship Completion & Reflection</h3>
+                        </div>
+                        <div class="img-placeholder">Upload your week 20 image here</div>
+                        <p class="week-description">
+                            In the final week, I reflected on my internship experience and documented lessons learned. I completed all outstanding tasks, handed over projects to team members, and prepared my final report. This internship has been an invaluable learning experience that will shape my professional career.
+                        </p>
+                    </div>
+
                 </section>
             </main>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
