@@ -3,21 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INDUSTRIAL TRAINING FINAL REPORT - Executive Summary</title>
+    <title>INDUSTRIAL TRAINING FINAL REPORT F1111 - Executive Summary</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa;
             font-family: 'Inter', sans-serif;
-        }
-        .sidebar-permanent {
-            background: #ffffff;
-            min-height: 100vh;
-            border-right: 1px solid #dee2e6;
-            position: fixed;
-            height: 100%;
-            overflow-y: auto;
-            z-index: 1;
+            padding-top: 56px;
         }
         .content-area {
             padding: 40px;
@@ -31,55 +23,87 @@
             font-size: 18px;
             text-align: justify;
         }
+        footer {
+            text-align: center;
+            font-family: 'oswald';
+            font-size: 12px;
+            margin-top: 170px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        footer p {
+            margin: 0;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
-
-    <!-- Mobile Folding Navbar -->
-    <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom d-md-none sticky-top">
-        <div class="container-fluid">
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top">
+        <div class="container-fluid px-4">
             <a class="navbar-brand fw-bold" href="#">INDUSTRIAL TRAINING FINAL REPORT</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="mobileMenu">
-                <ul class="navbar-nav pt-2">
+                <ul class="navbar-nav ms-auto alignment-fix" style="font-size: 13px;">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="company_bg.html">Company's Background</a></li>
                     <li class="nav-item"><a class="nav-link active">Executive Summary</a></li>
+                    <li class="nav-item"><a class="nav-link" href="li_introduction.html">Introduction</a></li>
+                    <li class="nav-item"><a class="nav-link" href="company_bg.html">Company's Background</a></li>
                     <li class="nav-item"><a class="nav-link" href="weekly_summary.html">Weekly Summary</a></li>
+                    <li class="nav-item"><a class="nav-link" href="technical_report.html">Technical Report</a></li>
+                    <li class="nav-item"><a class="nav-link" href="conclusion_suggestions.html">Recommendations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="references.html">References</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container mt-4">
         <div class="row">
-            <nav class="col-md-2 d-none d-md-block sidebar-permanent">
-                <h5 class="p-3">INDUSTRIAL TRAINING FINAL REPORT</h5>
-                <ul class="nav flex-column px-3">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="company_bg.html">Company's Background</a></li>
-                    <li class="nav-item"><a class="nav-link active">Executive Summary</a></li>
-                    <li class="nav-item"><a class="nav-link" href="weekly_summary.html">Weekly Summary</a></li>
-                </ul>
-            </nav>
-
-            <main class="col-md-10 offset-md-2 content-area">
+            <main class="col-12 content-area">
                 <section>
                     <h1>EXECUTIVE SUMMARY</h1>
                     <hr>
-                    <p class="my-5 text-break">
-                        After completing my Industrial Training at Dynamic Traffic System Sdn Bhd,
-                        spanning 20 weeks from January 5th to May 22nd 2026, I have gained profound insights into the professional realm,
-                        equipped with invaluable skills and practical experiences essential for my career development.
-                        This accomplishment fills me with pride and gratitude for the knowledge acquired, which will undoubtedly pave the way for future successes.
+                    <p class="mt-4">
+                        This report provides a comprehensive overview of my 20-week industrial training at <strong>Dynamic Traffic System Sdn Bhd (DynaTech)</strong>, conducted from January 5th to May 22nd, 2026. During this period, I was integrated into the AI depatment, focusing on two core domains: 3D environment simulation for traffic monitoring and modern Android application development.
+                    </p>
+
+                    <h3 class="mt-5">Key Technical Contributions</h3>
+                    <p>
+                        My primary responsibility involved the <strong>Radar Digital Twin Integration</strong> project. I successfully developed a workflow to transform JKR geospatial data and satellite imagery into high-fidelity 3D junction models using the Unity engine. These models serve as a foundational spatial framework for future radar telemetry integration.
+                    </p>
+                    <p>
+                        Additionally, I contributed to the modernization of the company's mobile software ecosystem. This included:
+                    </p>
+                    <ul>
+                        <li>Developing UI components using <strong>Jetpack Compose</strong> and Kotlin.</li>
+                        <li>Auditing and documenting system architectures, including ERDs and Use Case Diagrams.</li>
+                        <li>Integrating backend services via PHP APIs and PostgreSQL databases.</li>
+                        <li>Researching and implementing <strong>YOLO-based machine learning</strong> models for vehicle classification using datasets of over 21,000 images.</li>
+                    </ul>
+
+                    <h3 class="mt-5">Professional Development</h3>
+                    <p>
+                        Beyond technical implementation, this internship facilitated growth in <strong>Version Control (Git/GitHub)</strong>, and UI/UX design via Figma. I gained firsthand experience in the full software development lifecycle—from initial site visits and requirement gathering to deployment and hardware maintenance.
+                    </p>
+
+                    <h3 class="mt-5">Conclusion</h3>
+                    <p>
+                        The training at DynaTech has bridged the gap between my academic studies at <strong>Politeknik Sultan Idris Shah</strong> and real-world industrial demands. Equipped with these practical skills and a professional mindset, I am confident in my ability to contribute effectively to the digital technology sector. I am deeply grateful to my supervisors and colleagues for their mentorship throughout this transformative experience.
                     </p>
                 </section>
             </main>
         </div>
     </div>
-
+    <footer class="bg-primary py-5 text-white">
+        <p>[AFIQ IKMAL BIN AHMAD ZAINUDDIN]</p>
+        <p>[17DDT23F1111]</p>
+        <p>[DIPLOMA IN INFORMATION TECHNOLOGY (INFORMATION TECHNOLOGY)]</p>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

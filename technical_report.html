@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDUSTRIAL TRAINING FINAL REPORT - Technical Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+            padding-top: 56px;
+        }
+        /* Main content layout */
+        .content-area {
+            padding: 40px;
+        }
+        .nav-link.active {
+            background-color: #0d6efd;
+            color: white !important;
+            border-radius: 4px;
+        }
+        .workflow-diagram {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-weight: bold;
+            color: #0d6efd;
+            margin: 30px 0;
+        }
+        .workflow-step {
+            background: white;
+            padding: 10px 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+        .stage-header {
+            border-left: 4px solid #0d6efd;
+            padding-left: 15px;
+            margin-top: 30px;
+            color: #333;
+        }
+        p{
+            font-size: 17px;
+            line-height: 1.7;
+            text-align: justify;
+        }
+        /* Gallery Grid Styles */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: zoom-in;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #dee2e6;
+            background: #fff;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        /* Visual cue for the lecturer */
+        .gallery-item::after {
+            content: '🔍 Click to Zoom';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            /* display: grid;
+            place-items: center;
+            text-align: center; */
+        }
+        .gallery-caption {
+            font-size: 12px;
+            padding: 8px;
+            text-align: center;
+            background: #fff;
+            color: #6c757d;
+            border-top: 1px solid #f8f9fa;
+        }
+        footer {
+            text-align: center;
+            font-family: 'oswald';
+            margin-top: 170px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        footer p {
+            margin: 0;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold" href="#">INDUSTRIAL TRAINING FINAL REPORT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mobileMenu">
+                <ul class="navbar-nav ms-auto alignment-fix" style="font-size: 13px;">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="executive_summary.html">Executive Summary</a></li>
+                    <li class="nav-item"><a class="nav-link" href="li_introduction.html">Introduction</a></li>
+                    <li class="nav-item"><a class="nav-link" href="company_bg.html">Company's Background</a></li>
+                    <li class="nav-item"><a class="nav-link" href="weekly_summary.html">Weekly Summary</a></li>
+                    <li class="nav-item"><a class="nav-link active">Technical Report</a></li>
+                    <li class="nav-item"><a class="nav-link" href="conclusion_suggestions.html">Recommendations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="references.html">References</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <main class="col-12 content-area">
+                <h1 class="mb-4">Foundational 3D Environment Modeling for Proposed Radar Digital Twin Integration</h1>
+                <hr class="mb-5">
+
+                <h3>1. Introduction</h3>
+                <p>This report documents the workflow and methodology used to develop four distinct 3D junction models within the Unity engine. This work represents the foundational phase of a Radar Digital Twin project. Because the physical radar hardware has not yet been deployed on-site, the current scope of this project focuses entirely on environment preparation. The objective is to proactively construct accurate virtual replicas of target road intersections, establishing the necessary spatial frameworks so that radar detection data, tracking logic, and sensor telemetry can be seamlessly integrated once the hardware is installed.</p>
+
+                <h3 class="mt-5">2. Methodology & Workflow</h3>
+                <p>The development process follows a systematic pipeline utilizing web-based GIS (Geographic Information System) data and mapping tools to ensure high spatial fidelity.</p>
+
+                
+                <div class="workflow-diagram">
+                    <div class="workflow-step">JKR Portal</div>
+                    <span>&rarr;</span>
+                    <div class="workflow-step">Extract Latitude & Longitude</div>
+                    <span>&rarr;</span>
+                    <div class="workflow-step">Google Maps Reference</div>
+                    <span>&rarr;</span>
+                    <div class="workflow-step">Unity 3D Environment Pre-modeling</div>
+                </div>
+                
+                <h4 class="stage-header">Stage 1: Geographic Data Extraction</h4>
+                <p>To ensure the virtual environments align with official municipal traffic assets, target locations are identified using the Jabatan Kerja Raya (JKR) traffic management portal:</p>
+                <ol>
+                    <li>Navigate to the JKR platform at <a href="http://jkr.react.net.my" target="_blank">jkr.react.net.my</a>.</li>
+                    <div class="gallery-container">
+                        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                            <img src="Technical report/jkr website.avif" alt="JKR website">
+                            <div class="gallery-caption">JKR website</div>
+                        </div>                        
+                    </div>
+                    
+                    <li>Access the Traffic Light Menu to initialize the interactive OpenStreetMap interface.</li>
+                    <div class="gallery-container">
+                        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                            <img src="Technical report/traffic light menu.avif" alt="Traffic Light menu">
+                            <div class="gallery-caption">Traffic Light menu</div>
+                        </div>
+                        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                            <img src="Technical report/openstreetmap.avif" alt="OpenStreetMap">
+                            <div class="gallery-caption">OpenStreetMap</div>
+                        </div>
+                    </div>
+
+                    <li>Select the specific target junction marker (designated by a traffic light icon).</li>
+                    <div class="gallery-container">                            
+                        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                            <img src="Technical report/select junction marker.avif" alt="Select a junction">
+                            <div class="gallery-caption">Select a junction</div>
+                        </div>
+                    </div>
+
+                    <li>Click on the junction name within the detail card to redirect to the comprehensive Junction List.</li>
+                    <div class="gallery-container">                            
+                        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                            <img src="Technical report/click junction name.avif" alt="Click junction name">
+                            <div class="gallery-caption">Click junction name</div>
+                        </div>
+                        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                            <img src="Technical report/junction list.avif" alt="Junction list">
+                            <div class="gallery-caption">Junction list</div>
+                        </div>
+                    </div>
+
+                    <li>Extract the precise Latitude and Longitude coordinates assigned to the physical intersection.</li>
+                    <div class="gallery-container">                            
+                        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                            <img src="Technical report/extract lat long.avif" alt="Extract latitude and longitude">
+                            <div class="gallery-caption">Extract latitude and longitude</div>
+                        </div>
+                    </div>                        
+                </ol>
+
+                <h4 class="stage-header">Stage 2: Spatial Verification & Asset Reference</h4>
+                <p>To build accurate virtual replicas without active hardware feeds, remote sensing assets are used as a reference layout:</p>
+                <ul>
+                    <li>The extracted coordinates are mapped in Google Maps.</li>
+                    <div class="gallery-container">                            
+                        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                            <img src="Technical report/exact location.avif" alt="Junction location in Google Maps">
+                            <div class="gallery-caption">Junction location in Google Maps</div>
+                        </div>
+                    </div> 
+                    <li>Satellite imagery and street-level views are thoroughly analyzed to evaluate lane counts, intersection boundaries, and surrounding infrastructure geometry.</li>
+                    <div class="gallery-container">                            
+                        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                            <img src="Technical report/street view.avif" alt="Street view analysis">
+                            <div class="gallery-caption">Street view analysis</div>
+                        </div>
+                    </div> 
+                </ul>
+
+                <h4 class="stage-header">Stage 3: Virtual Environment Reconstruction in Unity</h4>
+                <p>
+                    Using the verified geographic data as a design baseline, the physical intersections are reconstructed inside the Unity engine. Scales, road geometries, and lane markings are modeled to accurately match real-world proportions. 
+                    To date, four (4) complete 3D junction environments have been successfully modeled.
+                </p>
+                <div class="gallery-container">                            
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                        <img src="Technical report/Simpang 3 CSR.avif" alt="Simpang 3 CSR">
+                        <div class="gallery-caption">Simpang 3 CSR</div>
+                    </div>
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                        <img src="Technical report/JKR-SEL-40.avif" alt="JKR-SEL-40">
+                        <div class="gallery-caption">JKR-SEL-40</div>
+                    </div>
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                        <img src="Technical report/Simpang 3 Tol Ebor.avif" alt="Simpang 3 Tol Ebor">
+                        <div class="gallery-caption">Simpang 3 Tol Ebor</div>
+                    </div>
+                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                        <img src="Technical report/Simpang 3 Proton Brothers.avif" alt="Simpang 3 Proton Brothers">
+                        <div class="gallery-caption">Simpang 3 Proton Brothers</div>
+                    </div>
+                </div> 
+
+                <h3 class="mt-5">3. Significance of the Environment-First Approach</h3>
+                <p>Developing the 3D environments prior to hardware installation offers several distinct advantages:</p>
+                <ul style="text-align: justify;">
+                    <li><strong>Pre-deployment Simulation:</strong> Unity models allow developers to simulate radar placement heights, field-of-view ranges, and potential structural blind spots before spending capital on physical installation.</li>
+                    <li><strong>Ready-to-Receive Architecture:</strong> Having the spatial framework ready means that once real-world radars are installed, data streams can be instantly mapped onto a verified coordinate system.</li>
+                </ul>
+                <h3 class="mt-5">4. Conclusion & Next Steps</h3>
+                <p>This phase of the project successfully establishes a reliable pipeline for converting JKR asset data into scalable 3D Unity environments, resulting in four finalized junction model</p>
+                <p>
+                    Since the physical radar units are not yet active, the immediate next steps will involve using simulated object data (such as artificial vehicle bounding boxes or waypoint paths) within Unity. 
+                    This will allow for the testing of the visualization layer and UI elements, ensuring the system is fully operational and waiting for the physical hardware integration.
+                </p>
+            </main>
+        </div>
+    </div>
+    <footer class="bg-primary py-5 text-white">
+        <p>[AFIQ IKMAL BIN AHMAD ZAINUDDIN]</p>
+        <p>[17DDT23F1111]</p>
+        <p>[DIPLOMA IN INFORMATION TECHNOLOGY (INFORMATION TECHNOLOGY)]</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Image Viewer Modal -->
+    <div class="modal fade" id="imageViewer" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 bg-transparent">
+                <div class="modal-header border-0 p-0">
+                    <button type="button" class="btn-close btn-close-white ms-auto m-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0 text-center">
+                    <img src="" id="fullImage" class="img-fluid rounded shadow">
+                    <video id="fullVideo" class="img-fluid rounded shadow" controls style="display: none; width: 100%;"></video>
+                    <div class="mt-3">
+                        <p id="imageCaption" class="text-white fw-bold mb-2"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function viewImage(element) {
+
+            const imgSrc = element.querySelector('img').src;
+            const imgAlt = element.querySelector('img').alt;
+            document.getElementById('fullImage').src = imgSrc;
+            document.getElementById('imageCaption').innerText = imgAlt;
+            document.getElementById('externalLink').href = imgSrc;
+
+            // const img = element.querySelector('img');
+            // const video = element.querySelector('video');
+            // const fullImage = document.getElementById('fullImage');
+            // const fullVideo = document.getElementById('fullVideo');
+            // const caption = document.getElementById('imageCaption');
+            // const link = document.getElementById('externalLink');
+
+            // fullImage.src = img.src;
+            // fullImage.style.display = 'block';
+            // fullVideo.style.display = 'none';
+            // fullVideo.pause();
+            // caption.innerText = img.alt;
+            // link.href = img.src;
+
+            // if (img) {
+            //     fullImage.src = img.src;
+            //     fullImage.style.display = 'block';
+            //     fullVideo.style.display = 'none';
+            //     fullVideo.pause();
+            //     caption.innerText = img.alt;
+            //     link.href = img.src;
+            // } else if (video) {
+            //     fullVideo.src = video.src;
+            //     fullVideo.style.display = 'block';
+            //     fullImage.style.display = 'none';
+            //     caption.innerText = element.querySelector('.gallery-caption').innerText;
+            //     link.href = video.src;
+            // }
+        }
+    </script>
+</body>
+</html>

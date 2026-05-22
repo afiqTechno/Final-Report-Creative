@@ -3,21 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INDUSTRIAL TRAINING FINAL REPORT - COMPANY'S BACKGROUND</title>
+    <title>INDUSTRIAL TRAINING FINAL REPORT F1111 - COMPANY'S BACKGROUND</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa;
             font-family: 'Inter', sans-serif;
-        }
-        .sidebar-permanent {
-            background: #ffffff;
-            min-height: 100vh;
-            border-right: 1px solid #dee2e6;
-            position: fixed;
-            height: 100%;
-            overflow-y: auto;
-            z-index: 1;
+            padding-top: 56px; /* Offset for fixed navbar */
         }
         .content-area {
             padding: 40px;
@@ -29,96 +21,122 @@
         }
         p {
             font-size: 18px;
-            text-align: justify;
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            font-family: 'oswald';
+            font-size: 12px;
+            margin-top: 170px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        footer p {
+            margin: 0;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom d-md-none sticky-top">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top">
+        <div class="container-fluid px-4">
             <a class="navbar-brand fw-bold" href="#">INDUSTRIAL TRAINING FINAL REPORT</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="mobileMenu">
-                <ul class="navbar-nav pt-2">
+                <ul class="navbar-nav ms-auto alignment-fix" style="font-size: 13px;">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active">Company's Background</a></li>
                     <li class="nav-item"><a class="nav-link" href="executive_summary.html">Executive Summary</a></li>
+                    <li class="nav-item"><a class="nav-link" href="li_introduction.html">Introduction</a></li>
+                    <li class="nav-item"><a class="nav-link active">Company's Background</a></li>
                     <li class="nav-item"><a class="nav-link" href="weekly_summary.html">Weekly Summary</a></li>
+                    <li class="nav-item"><a class="nav-link" href="technical_report.html">Technical Report</a></li>
+                    <li class="nav-item"><a class="nav-link" href="conclusion_suggestions.html">Recommendations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="references.html">References</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     
-    <div class="container-fluid">
+    <div class="container mt-4">
         <div class="row">
-            <nav class="col-md-2 d-none d-md-block sidebar-permanent">
-                <h5 class="p-3">INDUSTRIAL TRAINING FINAL REPORT</h5>
-                <ul class="nav flex-column px-3">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active">Company's Background</a></li>
-                    <li class="nav-item"><a class="nav-link" href="executive_summary.html">Executive Summary</a></li>
-                    <li class="nav-item"><a class="nav-link" href="weekly_summary.html">Weekly Summary</a></li>
-                </ul>
-            </nav>
-    
-            <main class="col-md-10 offset-md-2 content-area">
+            <main class="col-12 content-area">
                 <section>
-                    <h1>COMPANY'S BACKGROUND</h1>
+                    <h1 class="mb-4">COMPANY'S BACKGROUND</h1>
                     <hr>
 
                     <!-- 1. Company Overview -->
-                    <h2 class="mt-5">1. Company Overview</h2>
-                    <p>
-                        <strong>Official Name:</strong> Dynamic Traffic System Sdn Bhd (DynaTech).
-                    </p>
-                    <p>
-                        <strong>Establishment:</strong> Dynamic Traffic System Sdn Bhd was established in 2012.
-                    </p>
-                    <p>
-                        <strong>Mission:</strong> Their mission is to maximize each client's competitive position by providing innovative solutions and value-added services in a way that exceeds their quality expectations.
-                    </p>
-                    <p>
-                        <strong>Vision:</strong> The company's vision is to be the best manufacturer company in the eyes of their clients, communities, and people.
-                    </p>
-                    <p>
+                    <h2 class="my-4">1. Company Overview</h2>
+                    
+                    <div class="row justify-content-center my-4">
+                        <div class="col-md-12 d-grid gap-2">
+                            <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#officialName">Official Name</button>
+                            <div id="officialName" class="collapse">
+                                <p class="py-2 mb-0">Dynamic Traffic System Sdn Bhd (DynaTech)</p>
+                            </div>
+
+                            <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#establishment">Establishment</button>
+                            <div id="establishment" class="collapse">
+                                <p class="py-2 mb-0">Dynamic Traffic System Sdn Bhd was established in 2012.</p>
+                            </div>
+
+                            <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#mission">Mission</button>
+                            <div id="mission" class="collapse">
+                                <p class="py-2 mb-0">Their mission is to maximize each client's competitive position by providing innovative solutions and value-added services in a way that exceeds their quality expectations.</p>
+                            </div>
+
+                            <button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#vision">Vision</button>
+                            <div id="vision" class="collapse">
+                                <p class="py-2 mb-0">The company's vision is to be the best manufacturer company in the eyes of their clients, communities, and people.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p style="text-align: start;">
                         <strong>Location:</strong> The company is located at Seksyen BS6 Bukit Sentosa, 48300 Rawang, Selangor.
                     </p>
-                    <div class="embed-responsive embed-responsive-16by9 my-4">
-                        <!-- Replace the src with the actual Google Maps embed code for Dynamic Traffic System Sdn Bhd -->
+                    <div class="ratio ratio-16x9 mb-5">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3604.1752801488!2d101.58369167447069!3d3.412593551477784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc693c399e8a57%3A0x7d88adc7aa226bec!2sDynamic%20Traffic%20System%20Sdn%20Bhd!5e1!3m2!1sen!2smy!4v1778079312809!5m2!1sen!2smy" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
 
                     <!-- 2. Core Business & Services -->
-                    <h2 class="mt-5">2. Core Business & Services</h2>
-                    <p>
+                    <h2 class="mt-5 mb-4">2. Core Business & Services</h2>
+                    <p style="text-align: start;">
                         Dynamic Traffic System Sdn Bhd specializes in the design and manufacturing of traffic management products, including traffic light controllers and related systems. They focus on traffic light products and have expanded their offerings to include advanced technologies such as Internet of Things (IoT) solutions, RF Greenwave Link, and RF Countdown systems.
                     </p>
-                    <p>
+                    <p class="mt-3" style="text-align: start;">
                         Their comprehensive services encompass custom traffic light solutions, professional installation and setup, 24/7 technical support, routine maintenance and repairs, system upgrades to incorporate the latest technology, and expert training and consultation to optimize traffic flow and product utilization.
                     </p>
                     <div class="text-center my-4 p-3 bg-light border rounded">
-                        <img src="list project dyna.png" alt="Main Project List" class="img-fluid mb-2" style="max-height: 400px;">
-                        <p class="mb-0" style="font-size: 14px;"><i>Note</i>. Adapted from <i>List of Main Projects</i>, by Dynamic Traffic System Sdn Bhd, n.d., <a href="https://dynatech.my" target="_blank" rel="noopener noreferrer">dynatech.my</a>.</p>
-                    </p>
+                        <img src="images/list project dyna.png" alt="Main Project List" class="img-fluid mb-2" style="max-height: 400px;">
+                        <p class="mb-0" style="font-size: 14px; text-align: center;"><i>List of Main Projects</i></p>
                     </div>
 
                     <!-- 3. Organizational Structure -->
-                    <h2 class="mt-5">3. Organizational Structure</h2>
-                    <p>
+                    <h2 class="mt-5 mb-4">3. Organizational Structure</h2>
+                    <p style="text-align: start;">
                         The organizational structure of Dynamic Traffic System Sdn Bhd outlines the hierarchy and reporting relationships within the company, ensuring efficient operations and clear communication channels.
                     </p>
                     <div class="text-center my-4 p-3 bg-light border rounded">
-                        <img src="organization_chart.png" alt="Organization Chart" class="img-fluid mb-2" style="max-height: 400px;">
-                        <p class="mb-0" style="font-size: 14px;"><i>Note</i>. Adapted from <i>Organizational Chart</i>, by Dynamic Traffic System Sdn Bhd, 2024.</p>
+                        <img src="Images/organization_chart.avif" alt="Organization Chart" class="img-fluid mb-2" style="max-height: 400px;">
+                        <p class="mb-0" style="font-size: 14px; text-align: center;"><a href="https://dynatech.my/our-team"><i>Organizational Chart</i></a></p>
                     </div>
 
                 </section>
             </main>
         </div>
     </div>
-
+    <footer class="bg-primary py-5 text-white">
+        <p>[AFIQ IKMAL BIN AHMAD ZAINUDDIN]</p>
+        <p>[17DDT23F1111]</p>
+        <p>[DIPLOMA IN INFORMATION TECHNOLOGY (INFORMATION TECHNOLOGY)]</p>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

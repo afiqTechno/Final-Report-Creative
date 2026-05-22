@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INDUSTRIAL TRAINING FINAL REPORT - Weekly Summary</title>
+    <title>INDUSTRIAL TRAINING FINAL REPORT F1111 - Weekly Summary</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         html {
@@ -12,15 +12,7 @@
         body {
             background-color: #f8f9fa;
             font-family: 'Inter', sans-serif;
-        }
-        .sidebar-permanent {
-            background: #ffffff;
-            min-height: 100vh;
-            border-right: 1px solid #dee2e6;
-            position: fixed;
-            height: 100%;
-            overflow-y: auto;
-            z-index: 1;
+            padding-top: 56px;
         }
         .content-area {
             padding: 40px;
@@ -62,22 +54,61 @@
             font-weight: 600;
             margin: 0;
         }
-        .period {
-            font-size: 14px;
-            color: #6c757d; 
-            margin-left: auto;
-        }
-        .img-placeholder {
-            background: #e9ecef;
-            border: 2px dashed #adb5bd;
-            height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
+        /* Gallery Grid Styles */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
             margin: 20px 0;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: zoom-in;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #dee2e6;
+            background: #fff;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        /* Visual cue for the lecturer */
+        .gallery-item::after {
+            content: '🔍 Click to Zoom';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: grid;
+            place-items: center;
+            text-align: center;
+        }
+        .gallery-caption {
+            font-size: 12px;
+            padding: 8px;
+            text-align: center;
+            background: #fff;
             color: #6c757d;
-            font-size: 14px;
+            border-top: 1px solid #f8f9fa;
         }
         .week-description {
             color: #555;
@@ -86,321 +117,855 @@
             text-align: justify;
             overflow-wrap: break-word;
         }
+        .tag-container {
+            margin-top: 15px;
+        }
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
         hr {
-            margin: 30px 0;
-            border: none;
+            opacity: 1;
             border-top: 1px solid #dee2e6;
+            /* margin-bottom: 50px; */
+        }
+        footer {
+            text-align: center;
+            font-family: 'oswald';
+            font-size: 12px;
+            margin-top: 170px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        footer p {
+            margin: 0;
         }
     </style>
 </head>
 <body>    
-    <!-- Mobile Folding Navbar -->
-    <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom d-md-none sticky-top">
-        <div class="container-fluid">
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top">
+        <div class="container-fluid px-4">
             <a class="navbar-brand fw-bold" href="#">INDUSTRIAL TRAINING FINAL REPORT</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="mobileMenu">
-                <ul class="navbar-nav pt-2">
+                <ul class="navbar-nav ms-auto alignment-fix" style="font-size: 13px;">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="company_bg.html">Company's Background</a></li>
                     <li class="nav-item"><a class="nav-link" href="executive_summary.html">Executive Summary</a></li>
-                    <li class="nav-item"><a class="nav-link active">Weekly Summary</a></li>
+                    <li class="nav-item"><a class="nav-link" href="li_introduction.html">Introduction</a></li>
+                    <li class="nav-item"><a class="nav-link" href="company_bg.html">Company's Background</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">Weekly Summary</a>
+                        <ul class="dropdown-menu" style="font-size: 13px; overflow-y: auto;">
+                            <li><a class="dropdown-item" href="#week-1">Week 1</a></li>
+                            <li><a class="dropdown-item" href="#week-2">Week 2</a></li>
+                            <li><a class="dropdown-item" href="#week-3">Week 3</a></li>
+                            <li><a class="dropdown-item" href="#week-4">Week 4</a></li>
+                            <li><a class="dropdown-item" href="#week-5">Week 5</a></li>
+                            <li><a class="dropdown-item" href="#week-6">Week 6</a></li>
+                            <li><a class="dropdown-item" href="#week-7">Week 7</a></li>
+                            <li><a class="dropdown-item" href="#week-8">Week 8</a></li>
+                            <li><a class="dropdown-item" href="#week-9">Week 9</a></li>
+                            <li><a class="dropdown-item" href="#week-10">Week 10</a></li>
+                            <li><a class="dropdown-item" href="#week-11">Week 11</a></li>
+                            <li><a class="dropdown-item" href="#week-12">Week 12</a></li>
+                            <li><a class="dropdown-item" href="#week-13">Week 13</a></li>
+                            <li><a class="dropdown-item" href="#week-14">Week 14</a></li>
+                            <li><a class="dropdown-item" href="#week-15">Week 15</a></li>
+                            <li><a class="dropdown-item" href="#week-16">Week 16</a></li>
+                            <li><a class="dropdown-item" href="#week-17">Week 17</a></li>
+                            <li><a class="dropdown-item" href="#week-18">Week 18</a></li>
+                            <li><a class="dropdown-item" href="#week-19">Week 19</a></li>
+                            <li><a class="dropdown-item" href="#week-20">Week 20</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="technical_report.html">Technical Report</a></li>
+                    <li class="nav-item"><a class="nav-link" href="conclusion_suggestions.html">Recommendations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="references.html">References</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container mt-4">
         <div class="row">
-            <nav class="col-md-2 d-none d-md-block sidebar-permanent">
-                <h5 class="p-3">INDUSTRIAL TRAINING FINAL REPORT</h5>
-                <ul class="nav flex-column px-2">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="company_bg.html">Company's Background</a></li>
-                    <li class="nav-item"><a class="nav-link" href="executive_summary.html">Executive Summary</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">Weekly Summary</a>
-                        <ul class="dropdown-menu show">
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-1">Week 1</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-2">Week 2</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-3">Week 3</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-4">Week 4</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-5">Week 5</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-6">Week 6</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-7">Week 7</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-8">Week 8</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-9">Week 9</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-10">Week 10</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-11">Week 11</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-12">Week 12</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-13">Week 13</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-14">Week 14</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-15">Week 15</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-16">Week 16</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-17">Week 17</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-18">Week 18</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-19">Week 19</a></li>
-                            <li class="dropdown-item"><a class="nav-link py-1 text-secondary" href="#week-20">Week 20</a></li>
-                            <br>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-
-            <main class="col-md-10 offset-md-2 content-area">
+            <main class="col-12 content-area">
                 <section>
                     <h1>WEEKLY SUMMARY</h1>
-                    <hr>
-                    
+                    <hr class="mb-5">
+                                     
                     <!-- Week 1 -->
                     <div class="week-section" id="week-1">
                         <div class="week-header">
-                            <div class="week-number">1</div>
-                            <h3 class="week-title">Orientation & Company Introduction</h3>
+                            <h3 class="week-title">Week 1 - Environment Configuration & Technical Research</h3>
                             <br>
-                            <p class="period">5 January - 9 January</p>
                         </div>
-                        <div class="img-placeholder">Upload your week 1 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 1/digital twin.avif" alt="Digital Twin Project with Unity">
+                                <div class="gallery-caption">Digital Twin Project</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 1/vehicleTracker.png" alt="C# Script modification">
+                                <div class="gallery-caption">C# Script Modification</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 1/sumo.avif" alt="SUMO (Simulation of Urban MObility)">
+                                <div class="gallery-caption">SUMO Simulation</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 1/traffic recordings.jpeg" alt="Traffic Recordings Analysis">
+                                <div class="gallery-caption">Traffic Recordings</div>
+                            </div>
+                        </div>
+
                         <p class="week-description">
-                            Week 1 was focused on orientation and getting acquainted with the company environment. I was introduced to the company culture, met with team members, and learned about the organizational structure. I completed all necessary onboarding procedures and set up my workstation. This week helped me understand the company's mission, vision, and values.
+                            Initialized the internship by configuring the Unity development environment and establishing project compatibility within Unity Hub. 
+                            Foundational knowledge was gained through extensive research into Digital Twin concepts and traffic simulation methodologies. 
+                            Technical tasks included the modification of C# scripts for TCP server communication and the utilization of SUMO (Simulation of Urban Mobility) for R&D traffic analysis. 
+                            The week concluded with the acquisition of real-world datasets through the recording and processing of live CCTV traffic footage.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">SUMO</span>
+                            <span class="tag">Digital Twin</span>
+                            <span class="tag">Datasets</span>
+                        </div>
                     </div>
 
                     <!-- Week 2 -->
                     <div class="week-section" id="week-2">
                         <div class="week-header">
-                            <div class="week-number">2</div>
-                            <h3 class="week-title">Project Requirements & Planning</h3>
+                            <h3 class="week-title">Week 2 - Version Control Integration & AI Model Training</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 2 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 2/DigiTwin vcs.avif" alt="Digital Twin with Unity Version Control">
+                                <div class="gallery-caption">Digital Twin with Unity Version Control</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 2/vehicle classify.avif" alt="Image annotation">
+                                <div class="gallery-caption">Image annotation</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 2/3d vehicles.avif" alt="3D vehicle models">
+                                <div class="gallery-caption">3D vehicle models</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 2/trainPY.avif" alt="Training script">
+                                <div class="gallery-caption">Training script</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 2/trainData.avif" alt="Training data">
+                                <div class="gallery-caption">Training data</div>
+                            </div>
+                        </div>
+
                         <p class="week-description">
-                            During week 2, I participated in detailed project planning sessions. We discussed the project requirements, timelines, and deliverables. I learned about the technology stack being used and started familiarizing myself with the project documentation. This week was crucial in understanding what we need to accomplish.
+                            Focused on collaborative infrastructure by connecting the project to Version Control (Plastic SCM) and managing team repository access. 
+                            Research was conducted on radar data visualization and the limitations of object classification in radar hardware, leading to the implementation of machine learning solutions. 
+                            Technical milestones included the development of 3D vehicle models based on Malaysian PCU standards and the configuration of Label Studio for image annotation. 
+                            The week concluded with the preparation of datasets in YOLO format and the execution of Python-based training scripts to initiate the vehicle detection model.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag">Git</span>
+                            <span class="tag">Version Control</span>
+                            <span class="tag">Radar Data Visualization</span>
+                            <span class="tag">Label Studio</span>
+                            <span class="tag">3D Vehicle Models</span>
+                            <span class="tag">Object Classification</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">YOLO</span>
+                            <span class="tag">Model Training</span>
+                        </div>
                     </div>
 
                     <!-- Week 3 -->
                     <div class="week-section" id="week-3">
                         <div class="week-header">
-                            <div class="week-number">3</div>
-                            <h3 class="week-title">Development Environment Setup</h3>
+                            <h3 class="week-title">Week 3 - Dataset Structuring & Web Deployment</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 3 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="Week 3/training session.avif" alt="YOLO training session with 21,000 images dataset">
+                                <div class="gallery-caption">YOLO training session with 21,000 images dataset</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <video src="Week 3/21K dataset YOLO training result.mp4" muted loop autoplay playsinline></video>
+                                <div class="gallery-caption">YOLO training result</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 3/DigiTwin GitHub host.avif" alt="Digital Twin projct hosting with GitHub">
+                                <div class="gallery-caption">Digital Twin project hosting with GitHub</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 3/sample maps.avif" alt="Sample Google Maps reference">
+                                <div class="gallery-caption">Sample Google Maps reference</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 3/sample 3d junction.avif" alt="Sample 3D junction (PH3A)">
+                                <div class="gallery-caption">Sample 3D junction (PH3A)</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            Week 3 involved setting up all necessary development tools and environments. I installed required software, configured version control systems, and set up my development IDE. This week prepared me for the actual coding tasks that would follow in the coming weeks.
+                            Focused on optimizing the machine learning workflow by partitioning datasets into train and validation subsets and configuring YAML metadata for the model. 
+                            Technical implementation included the deployment of the Unity project to a web-based platform using InfinityFree and GitHub Pages for remote accessibility. 
+                            Environment development involved utilizing Google Maps coordinates to accurately reconstruct 3D junction models within the Unity Editor. 
+                            The week concluded with repository synchronization and asset management to ensure technical consistency across the development team.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag">Unity</span>        
+                            <span class="tag">3D Junction Models</span>           
+                            <span class="tag">Digital Twin</span>   
+                            <span class="tag">Web Hosting</span>           
+                            <span class="tag">Version Control</span>           
+                        </div>
                     </div>
 
                     <!-- Week 4 -->
                     <div class="week-section" id="week-4">
                         <div class="week-header">
-                            <div class="week-number">4</div>
-                            <h3 class="week-title">Backend Development - Phase 1</h3>
+                            <h3 class="week-title">Week 4 - Scripting Fundamentals & Infrastructure Modeling</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 4 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 4/jkr junction maps.avif" alt="JKR's junction maps">
+                                <div class="gallery-caption">JKR's junction maps</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 4/JKR-SEL-PE40.avif" alt="Sample 3D junction (JKR-SEL-PE40)">
+                                <div class="gallery-caption">Sample 3D junction (JKR-SEL-PE40)</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            In week 4, I started backend development work. I created the initial project structure and began implementing core APIs. I worked on database schema design and started writing the first set of API endpoints. This week marked the beginning of actual coding contributions to the project.
+                            Focus was directed toward advancing technical proficiency through the study of MonoBehaviour scripting and the Unity Junior Programming Pathway. 
+                            Professional collaboration involved utilizing official JKR (Jabatan Kerja Raya) data to access traffic management systems and coordinate datasets. 
+                            Technical milestones included the precise 3D reconstruction of multiple junction models.
+                            These models were developed within the Unity Editor using geospatial coordinates and satellite imagery to ensure environmental accuracy.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag">C#</span>
+                            <span class="tag">Unity</span>
+                            <span class="tag">JKR</span>
+                            <span class="tag">Traffic Management System</span>
+                            <span class="tag">Coordinate Datasets</span>
+                            <span class="tag">3D Junctions Model</span>
+                        </div>
                     </div>
 
                     <!-- Week 5 -->
                     <div class="week-section" id="week-5">
                         <div class="week-header">
-                            <div class="week-number">5</div>
-                            <h3 class="week-title">Backend Development - Phase 2</h3>
+                            <h3 class="week-title">Week 5 - Computer Vision Annotation & Hardware Maintenance</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 5 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">   
+                                <img src="week 5/license plate labeling.avif" alt="License plate labeling">                             
+                                <div class="gallery-caption">License plate labeling</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">   
+                                <img src="week 5/Brother DCP-T420W.jpeg" alt="Brother DCP-T420W">                             
+                                <div class="gallery-caption">Brother DCP-T420W</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">   
+                                <img src="week 5/Wi-Fi setup.jpeg" alt="Printer SSID and password">                             
+                                <div class="gallery-caption">Printer SSID and password</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            Week 5 continued backend development with more complex features. I implemented authentication and authorization mechanisms, added data validation, and created additional API endpoints. I also started writing unit tests for the components I developed.
+                            Technical focus was placed on high-precision data annotation for license plate recognition using Label Studio. 
+                            Stringent quality control measures were implemented by excluding blurred images and ensuring tight bounding box accuracy to prevent model confusion. 
+                            Datasets were prepared across diverse lighting conditions and angles to enhance model robustness, culminating in the export of data in the COCO format for machine learning training. 
+                            Additionally, technical support was provided through the configuration of office hardware, involving the network integration of a Brother DCP-T420W printer via Wi-Fi Protected Setup (WPS), scanner calibration for PDF archiving at 300 dpi, and the execution of maintenance procedures including print head cleaning and refill tank system management.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag">Label Studio</span>
+                            <span class="tag">Data Annotation</span>
+                            <span class="tag">COCO</span>
+                        </div>
                     </div>
 
                     <!-- Week 6 -->
                     <div class="week-section" id="week-6">
                         <div class="week-header">
-                            <div class="week-number">6</div>
-                            <h3 class="week-title">Frontend Development - Phase 1</h3>
+                            <h3 class="week-title">Week 6 - Project Review, Scripting & OS Deployment</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 6 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 6/randomize car color.png" alt="Code to randomized color of vehicles">
+                                <div class="gallery-caption">Code to randomized color of vehicles</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 6/site visit 1.avif" alt="Site visit">
+                                <div class="gallery-caption">Site visit</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            During week 6, I transitioned to frontend development. I created the basic UI components and started building the user interface according to the design mockups. I learned about responsive design principles and implemented them in the application.
+                            Participation was required in a series of technical presentations where progress on simulation, Android UI/UX optimization, and Digital Twin junction modeling was evaluated. 
+                            Technical implementation involved modifying C# scripts within Visual Studio to automate randomized color assignment for vehicle tracking modules. 
+                            A site visit was conducted at the Persiaran Kuala Kali junction to observe the field testing of a Node-RED program designed for real-time vehicle classification and tracking. 
+                            The week concluded with system administration tasks, specifically the configuration of a dual-boot environment by installing Ubuntu Desktop via a bootable USB and managing disk partitioning and BIOS security settings.
                         </p>
+                        <div class="tag-container">      
+                            <span class="tag">Project Review</span>
+                            <span class="tag">Unity</span>                 
+                            <span class="tag">Digital Twin</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">Site Visit</span>
+                            <span class="tag">Node-RED</span>
+                            <span class="tag">Ubuntu</span>
+                        </div>
                     </div>
 
                     <!-- Week 7 -->
                     <div class="week-section" id="week-7">
                         <div class="week-header">
-                            <div class="week-number">7</div>
-                            <h3 class="week-title">Frontend Development - Phase 2</h3>
+                            <h3 class="week-title">Week 7 - System Optimization & Android Project Initiation</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 7 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 7/Android project folders and documentation.avif" alt="Android project folders and documentation">
+                                <div class="gallery-caption">Android project folders and documentation</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 7/android studio project.avif" alt="New Android project">
+                                <div class="gallery-caption">New Android project</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 7/wireless debugging.avif" alt="Wireless debugging an app">
+                                <div class="gallery-caption">Wireless debugging an app</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            Week 7 saw me continuing frontend work with more advanced features. I integrated the frontend with backend APIs, implemented state management, and added client-side validation. The application started to look and function like a complete product.
+                            Focus was directed toward establishing a robust development environment within Ubuntu Desktop. 
+                            Technical tasks included system stabilization via terminal-based package management, the installation of essential build tools, and the implementation of Zsh and GNOME Tweaks for enhanced workflow productivity. 
+                            System reliability was ensured through the configuration of automated backups using Timeshift and resource monitoring via Htop. 
+                            The latter half of the week involved transitioning to a new development phase, which included auditing documentation from previous developers and initializing project migration into Android Studio. 
+                            Initial deployment testing was conducted by pairing a mobile hardware device via wireless debugging to verify application functionality and feature accessibility.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag">Android Studio</span>
+                            <span class="tag">Wireless Debugging</span>
+                            <span class="tag">Ubuntu</span>
+                            <span class="tag">Zsh</span>
+                            <span class="tag">GNOME Tweaks</span>
+                            <span class="tag">Htop</span>
+                        </div>
                     </div>
 
                     <!-- Week 8 -->
                     <div class="week-section" id="week-8">
                         <div class="week-header">
-                            <div class="week-number">8</div>
-                            <h3 class="week-title">Testing & Quality Assurance</h3>
+                            <h3 class="week-title">Week 8 - System Architecture Analysis & Design Review</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 8 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 8/project bg.png" alt="Project background">
+                                <div class="gallery-caption">Project background</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 8/problem statement.png" alt="Problem statement">
+                                <div class="gallery-caption">Problem statement</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 8/erd.avif" alt="Entity Relationship Diagram">
+                                <div class="gallery-caption">Entity Relationship Diagram</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 8/context diagram.avif" alt="Context Diagram">
+                                <div class="gallery-caption">Context Diagram</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 8/use case diagram 2.avif" alt="Use Case Diagram">
+                                <div class="gallery-caption">Use Case Diagram</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 8/real time monitoring flowchart.avif" alt="Real time monitoring flowchart">
+                                <div class="gallery-caption">Real time monitoring flowchart</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            In week 8, I focused on testing and quality assurance. I created test cases, performed manual testing, and identified bugs. I also set up automated testing pipelines and worked on improving code quality through code reviews.
+                            Dedicated the week to a comprehensive technical audit of the project’s official documentation. 
+                            Analysis was conducted on the project background, problem statements, and core objectives to align development goals. 
+                            A deep dive into the system architecture revealed a Client-Server-Hardware layered structure, utilizing a technology stack comprising PostgreSQL, Node-RED, and XAMPP for API hosting. 
+                            Furthermore, the technical review covered functional and non-functional requirements, alongside a detailed evaluation of system design diagrams, including Entity Relationship Diagrams (ERD), Context Diagrams, Use Case Diagrams, and process flowcharts to ensure a complete understanding of the application's data logic and user interface.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag">Documentation Audit</span>
+                            <span class="tag">System Architecture</span>
+                            <span class="tag">ERD</span>
+                            <span class="tag">Context Diagrams</span>
+                            <span class="tag">Use Case Diagrams</span>
+                            <span class="tag">Process Flowcharts</span>
+                        </div>
                     </div>
 
                     <!-- Week 9 -->
                     <div class="week-section" id="week-9">
                         <div class="week-header">
-                            <div class="week-number">9</div>
-                            <h3 class="week-title">Bug Fixes & Optimization</h3>
+                            <h3 class="week-title">Week 9 - Full-Stack Configuration & Backend Integration</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 9 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 9/pgAdmin4 config.avif" alt="New registered server in pgAdmin 4">
+                                <div class="gallery-caption">New registered server in pgAdmin 4</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 9/nodeRED.avif" alt="Node-RED server">
+                                <div class="gallery-caption">Node-RED server</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 9/php api.avif" alt="Local PHP API">
+                                <div class="gallery-caption">Local PHP API</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 9/app permissions.avif" alt="App permissions">
+                                <div class="gallery-caption">App permissions</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 9/app activities.avif" alt="App activities">
+                                <div class="gallery-caption">App activities</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 9/app activities.avif" alt="App activities">
+                                <div class="gallery-caption">App activities</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            Week 9 was dedicated to fixing bugs found during testing and optimizing the application. I improved database queries, optimized frontend performance, and addressed all critical issues. The application was now much more stable and efficient.
+                            Technical focus was directed toward mastering Kotlin programming fundamentals, specifically regarding mutable and immutable variables, functional parameters, and null-safety through the Elvis operator. 
+                            Database management involved the installation and configuration of pgAdmin 4, where a new server was registered and synchronized with the Android Studio codebase. 
+                            Further integration included establishing communication with the Node-RED server and conducting hardware verification via Traffic Light Controller navigation to ensure data integrity between the mobile application and physical controllers. 
+                            The week concluded with the deployment of a local API environment using XAMPP, involving the configuration of PHP-based endpoints and the optimization of the AndroidManifest for permission management and activity lifecycle tracking.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag">Kotlin</span>
+                            <span class="tag">Android Studio</span>
+                            <span class="tag">Database</span>
+                            <span class="tag">PostgreSQL</span>
+                            <span class="tag">Node-RED</span>
+                            <span class="tag">Traffic Light Controller</span>
+                            <span class="tag">PHP API</span>
+                            <span class="tag">XAMPP</span>
+                        </div>
                     </div>
 
                     <!-- Week 10 -->
                     <div class="week-section" id="week-10">
                         <div class="week-header">
-                            <div class="week-number">10</div>
-                            <h3 class="week-title">Documentation & Knowledge Transfer</h3>
+                            <h3 class="week-title">Week 10 - Dependency Auditing & Backend Logic Tracing</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 10 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 10/build gradle.avif" alt="Build gradle">
+                                <div class="gallery-caption">Build gradle</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 10/api client baseUrl.avif" alt="API connectivity">
+                                <div class="gallery-caption">API connectivity</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 10/inline code review example.avif" alt="Inline code review example">
+                                <div class="gallery-caption">Inline code review example</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 10/session.avif" alt="Session">
+                                <div class="gallery-caption">Session</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            During week 10, I documented all aspects of the project including API documentation, user manual, and technical specifications. I also began knowledge transfer sessions with team members to ensure they understand the implemented features.
+                            Focused on technical system auditing by reviewing build.gradle configurations to manage third-party dependencies and project versioning. 
+                            The local development environment was maintained through XAMPP Apache services and IPv4 synchronization to ensure consistent API connectivity. 
+                            Advanced debugging techniques, including inline code reviews and declaration tracing, were utilized to map data flow between Kotlin source files and PHP API functions. 
+                            Furthermore, the backend infrastructure was evaluated by tracing PostgreSQL database schemas in pgAdmin 4 and investigating system resilience regarding API timeouts and connectivity failures. 
+                            The week concluded with a comprehensive analysis of Token management and session persistence logic to ensure secure user authentication.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag">Android Studio</span>
+                            <span class="tag">Dependency Management</span>
+                            <span class="tag">Debugging</span>                                                       
+                            <span class="tag">PHP API</span>                                                       
+                            <span class="tag">PostgreSQL</span>                                                       
+                            <span class="tag">Database Tracing</span>
+                            <span class="tag">Open Authentication (OAuth)</span>
+                            <span class="tag">Token</span>
+                        </div>
                     </div>
 
                     <!-- Week 11 -->
                     <div class="week-section" id="week-11">
                         <div class="week-header">
-                            <div class="week-number">11</div>
-                            <h3 class="week-title">Deployment Preparation</h3>
+
+                            <h3 class="week-title">Week 11 - Interface Inspection & UI Hierarchy Analysis</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 11 image here</div>
-                        <p class="week-description">
-                            In week 11, we prepared for deployment. I set up production environment configurations, created deployment scripts, and performed final testing on the staging environment. Everything was ready for the production release.
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 11/app design standard.avif" alt="App design standard">
+                                <div class="gallery-caption">App design standard</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 11/EditText usage in backend.avif" alt="Example of EditText usage in backend">
+                                <div class="gallery-caption">Example of EditText usage in backend</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 11/toggle layout inspector.avif" alt="Toggle Layout Inspector">
+                                <div class="gallery-caption">Toggle Layout Inspector</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 11/toggle deep inspect.avif" alt="Toggle Deep Inspect">
+                                <div class="gallery-caption">Toggle Deep Inspect</div>
+                            </div>
+                        </div>
+                        <p class="week-description">                             
+                            Architectural consistency was evaluated by identifying the application's design system, specifically the standardization of typography, iconography, and color palettes. 
+                            Technical inspection was performed on input handling mechanisms, tracing EditText components from XML layouts to their implementation in Kotlin source code. 
+                            The week concluded with a deep dive into dynamic list rendering and UI hierarchy using Layout Inspector and USB Debugging. 
+                            By mirroring hardware devices and utilizing Toggle Deep Inspect, UI components were mapped to their backend logic, enabling a precise understanding of the interaction between the frontend hierarchy and functional code.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag">Android Studio</span>
+                            <span class="tag">UI/UX</span>
+                            <span class="tag">Typography</span>
+                            <span class="tag">Iconography</span>
+                            <span class="tag">Color Palette</span>
+                            <span class="tag">Deep Link</span>
+                            <span class="tag">Layout Inspector</span>
+                            <span class="tag">Toggle Deep Inspect</span>                    
+                        </div>
                     </div>
 
                     <!-- Week 12 -->
                     <div class="week-section" id="week-12">
                         <div class="week-header">
-                            <div class="week-number">12</div>
-                            <h3 class="week-title">Production Deployment</h3>
+
+                            <h3 class="week-title">Week 12 - Security Validation & Backend Data Integration</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 12 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 12/password regex.png" alt="Password Regular Expressions/Pattern">
+                                <div class="gallery-caption">Password Regular Expressions/Pattern</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 12/directory structure.png" alt="Directory Structure">
+                                <div class="gallery-caption">Directory Structure</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 12/database connect.png" alt="Database Connectivity">
+                                <div class="gallery-caption">Database Connectivity</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 12/database read.avif" alt="Database read">
+                                <div class="gallery-caption">Database read</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 12/Database write.png" alt="Database write">
+                                <div class="gallery-caption">Database write</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            Week 12 marked the official deployment to production. I assisted in the deployment process and monitored the application for any issues. The successful deployment was a major milestone for the project.
+                            Technical focus was directed toward security protocols by auditing Regular Expressions (REGEX) used for password validation during account registration and credential updates. 
+                            Project management tasks included a comprehensive review of the directory structure to optimize file navigation and resource retrieval. 
+                            Database connectivity was further analyzed by identifying server credentials—including IP addresses, port configurations, and authentication parameters—within the network layer. 
+                            Additionally, the relationship between frontend components and backend data was mapped by tracing UI elements to the functional code responsible for fetching and displaying database records. 
+                            The week concluded with an investigation into data persistence, specifically analyzing the logic used to process text inputs for database write operations.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag">Android Studio</span>
+                            <span class="tag">REGEX</span>
+                            <span class="tag">Directory Structure</span>
+                            <span class="tag">Database Connectivity</span>
+                            <span class="tag">Data Persistence</span>
+                            <span class="tag">UI Element Mapping</span>                         
+                        </div>
                     </div>
 
                     <!-- Week 13 -->
                     <div class="week-section" id="week-13">
                         <div class="week-header">
-                            <div class="week-number">13</div>
-                            <h3 class="week-title">Post-Deployment Monitoring</h3>
+
+                            <h3 class="week-title">Week 13 - Debugging, UI Responsiveness & Code Optimization</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 13 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 13/database exception handling.png" alt="Database failure exception handling">
+                                <div class="gallery-caption">Database failure exception handling</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 13/virtual devices.png" alt="Android virtual devices">
+                                <div class="gallery-caption">Android virtual devices</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 13/logcat.avif" alt="Logcat">
+                                <div class="gallery-caption">Logcat</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            During week 13, I monitored the production application closely for any performance issues or bugs. I set up monitoring and alerting systems to catch problems early. Several minor issues were identified and fixed quickly.
+                            Technical focus was directed toward system resilience by auditing exception handling logic and error messaging protocols for database connectivity failures. 
+                            UI/UX testing was conducted using the Android Virtual Device (AVD) Manager to evaluate layout responsiveness across multiple screen resolutions and hardware profiles. 
+                            Advanced debugging was performed through Logcat analysis via USB debugging, enabling the monitoring of background processes and non-visual system messages during real-time application interaction. 
+                            The week concluded with a comprehensive code review aimed at identifying redundant logic for refactoring, alongside an audit of legacy developer documentation to interpret complex functional logic and internal system dependencies.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag">Android Studio</span>
+                            <span class="tag">Layout Responsiveness</span>
+                            <span class="tag">Logcat Analysis</span>
+                            <span class="tag">Debugging</span>
+                        </div>
                     </div>
 
                     <!-- Week 14 -->
                     <div class="week-section" id="week-14">
                         <div class="week-header">
-                            <div class="week-number">14</div>
-                            <h3 class="week-title">Feature Enhancement - Phase 1</h3>
+
+                            <h3 class="week-title">Week 14 - Version Control Implementation & Functional Architecture Mapping</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 14 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 14/github repo.avif" alt="GitHub repository">
+                                <div class="gallery-caption">GitHub repository</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 14/branches.png" alt="Branches">
+                                <div class="gallery-caption">Branches</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 14/use case diagram.avif" alt="Use Case Diagrams">
+                                <div class="gallery-caption"><a href="https://canva.link/nt6cxqeydaogok9" target="_blank">Use Case Diagrams</a></div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            Week 14 involved implementing additional features based on user feedback and business requirements. I developed new functionality while maintaining the stability of existing features. The application continued to improve.
+                            Focus was initiated by establishing a Version Control System (VCS) using Git and GitHub, including the implementation of a branching strategy to facilitate experimental development without compromising the primary codebase. 
+                            Analytical reviews were conducted to identify reusable modular functions within the Kotlin source files through extensive cross-reference tracing. 
+                            Following a progress review with the executive team, a new development milestone was established to synchronize mobile features with existing web-based project logic. 
+                            The week concluded with the formalization of the application’s functional architecture, involving the creation of <a href="https://canva.link/nt6cxqeydaogok9" target="_blank">Use Case Diagrams</a> and comprehensive scenario mapping to document user workflows and feature specifications for a formal technical presentation to the Project Leader.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag">Android Studio</span>
+                            <span class="tag">Git</span>
+                            <span class="tag">GitHub</span>
+                            <span class="tag">Project Review</span>
+                            <span class="tag">Use Case Diagrams</span>
+                            <span class="tag">Scenario Mapping</span>
+                            <span class="tag">Functional Architecture</span>
+                        </div>
                     </div>
 
                     <!-- Week 15 -->
                     <div class="week-section" id="week-15">
                         <div class="week-header">
-                            <div class="week-number">15</div>
-                            <h3 class="week-title">Feature Enhancement - Phase 2</h3>
+
+                            <h3 class="week-title">Week 15 - UI/UX Optimization, Native Development & AI Research</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 15 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 15/bersih.avif" alt="Cleaning workplace">
+                                <div class="gallery-caption">Cleaning workplace</div>
+                            </div>
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 15/figma design.avif" alt="Redesign a page in Figma">
+                                <div class="gallery-caption">Redesign a page in Figma</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            During week 15, I continued enhancing the application with more advanced features. I worked on improving user experience and adding functionalities that were requested by stakeholders. The application became more powerful and user-friendly.
+                            The week began with corporate social responsibility activities focused on workplace health and safety. 
+                            Technical focus then transitioned to UI/UX optimization, where a mobile interface was redesigned in Figma to minimize cognitive load and streamline user interactions. 
+                            Following an iterative review process with the Project Leader, the design was refined to meet all functional requirements and approved for production. 
+                            Technical implementation was executed using Jetpack Compose, Android’s modern declarative UI toolkit, within a dedicated Git branch to maintain version control integrity. 
+                            The week concluded with a research initiative into "Design-to-Code" workflows, exploring how AI Agents and Android Studio plugins can automate UI layout tasks and bridge the gap between design prototypes and production-ready code.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag">UI/UX</span>
+                            <span class="tag">Figma</span>
+                            <span class="tag">Android Studio</span>
+                            <span class="tag">Git Branch</span>
+                            <span class="tag">Jetpack Compose</span>
+                            <span class="tag">Plugins</span>
+                            <span class="tag">Design-to-Code</span>
+                        </div>
                     </div>
 
                     <!-- Week 16 -->
                     <div class="week-section" id="week-16">
                         <div class="week-header">
-                            <div class="week-number">16</div>
-                            <h3 class="week-title">Security Audit & Implementation</h3>
+
+                            <h3 class="week-title">Week 16 - AI-Driven UI Engineering & Session Persistence Debugging</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 16 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 15/figma design.avif" alt="Redesign a page in Figma">
+                                <div class="gallery-caption">Placeholder</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            In week 16, I conducted a comprehensive security audit of the application. I identified potential vulnerabilities and implemented security patches. I also improved authentication mechanisms and data encryption standards to protect user information.
+                            Technical capabilities were expanded by integrating a Figma Model Context Protocol (MCP) Server via JSON configuration within Android Studio to establish an automated design-to-code pipeline. 
+                            An AI Agent was utilized to parse Figma design links and generate native Jetpack Compose layouts alongside UI previews, which were subsequently integrated with backend operational logic. 
+                            The mid-week focus shifted to advanced debugging, where an inspection was conducted on a critical bug causing user roles to intermittently reset to null. 
+                            This was resolved by refactoring the SharedPreferences data persistence layer and optimizing lifecycle hooks with safe background commits. 
+                            The week concluded with an analysis of the Role-Based Access Control (RBAC) framework to ensure that navigation structures dynamically adapt visibility according to administrative or restricted user roles.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag"></span>
+                        </div>
                     </div>
 
                     <!-- Week 17 -->
                     <div class="week-section" id="week-17">
                         <div class="week-header">
-                            <div class="week-number">17</div>
-                            <h3 class="week-title">Performance Optimization</h3>
+
+                            <h3 class="week-title">Week 17 - Role-Based Access Control (RBAC) Enforcement & Component Architecture Refactoring</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 17 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 15/figma design.avif" alt="Redesign a page in Figma">
+                                <div class="gallery-caption">Placeholder</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            Week 17 focused on optimizing application performance. I analyzed load times, optimized database queries, implemented caching mechanisms, and reduced the bundle size of frontend assets. The application became significantly faster.
+                            Technical development focused on securing the application interface by implementing conditional validation checks within the primary navigation framework. 
+                            Stored user roles were queried to dynamically manage the visibility of administrative pages, ensuring restricted privileges are strictly enforced. 
+                            This Role-Based Access Control (RBAC) logic was scaled across all secondary pages to eliminate potential unauthorized menu visibility. The latter half of the week involved a detailed design audit of layout files to address structural discrepancies and missing navigation hooks within the footer modules. 
+                            The global footer bar was subsequently refactored into a standardized, reusable architectural component, reducing code duplication and unifying the visual experience across all primary dashboards.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag"></span>
+                        </div>
                     </div>
 
                     <!-- Week 18 -->
                     <div class="week-section" id="week-18">
                         <div class="week-header">
-                            <div class="week-number">18</div>
-                            <h3 class="week-title">Team Collaboration & Mentoring</h3>
+
+                            <h3 class="week-title">Week 18 - Gesture Conflict Resolution & Dynamic Search UI Engineering</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 18 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 15/figma design.avif" alt="Redesign a page in Figma">
+                                <div class="gallery-caption">Placeholder</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            During week 18, I collaborated closely with team members and helped mentor junior developers. I shared knowledge about the project architecture, best practices, and technical solutions. This collaborative work strengthened the team.
+                            Technical execution involved expanding the global footer component deployment across all secondary application modules, verifying navigation callback integrity throughout diverse runtime contexts. 
+                            Focus then shifted to solving interaction bugs by investigating touch gesture conflicts between nested layouts and an embedded OpenStreetMap (OSM) view. 
+                            This was resolved by implementing custom touch event dispatching logic via interception overrides (requestDisallowInterceptTouchEvent) to ensure smooth map manipulation within scrollable containers. 
+                            The week concluded with a usability enhancement for infrastructure navigation, designing and developing a real-time Junction ID search algorithm. 
+                            The subsystem utilizes a TextWatcher lifecycle listener to dynamically filter master dataset collection strings, binding live results to an interactive dropdown interface.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag"></span>
+                        </div>
                     </div>
 
                     <!-- Week 19 -->
                     <div class="week-section" id="week-19">
                         <div class="week-header">
-                            <div class="week-number">19</div>
-                            <h3 class="week-title">Final Review & Presentation</h3>
+
+                            <h3 class="week-title">Week 19 - Accessibility Refinement & Background Thread Optimization</h3>
                         </div>
-                        <div class="img-placeholder">Upload your week 19 image here</div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 15/figma design.avif" alt="Redesign a page in Figma">
+                                <div class="gallery-caption">Placeholder</div>
+                            </div>
+                        </div>
                         <p class="week-description">
-                            Week 19 involved conducting a final review of all work completed during the internship. I prepared presentation materials and demonstrated the project to stakeholders. The feedback received was positive and encouraging.
+                            Engineering efforts focused on accessibility optimization by conducting a visual contrast audit on application input fields. 
+                            A critical UI flaw involving low text cursor visibility within EditText layers was resolved by modifying component attributes and custom cursor drawables to meet mobile readability standards. 
+                            The mid-week focus shifted to hardware-software synchronization, diagnosing a failure where time-sync updates from the Traffic Light Controller halted upon application minimization. 
+                            Logcat data and lifecycle state machines were analyzed to trace the breakdown to thread suspension within UI-dependent layers. 
+                            This was corrected by decoupling hardware polling routines from volatile view lifecycles and refactoring the logic into persistent, background-resilient asynchronous structures to maintain immediate synchronization upon app focus recovery.
                         </p>
+                        <div class="tag-container">
+                            <span class="tag"></span>
+                        </div>
                     </div>
 
                     <!-- Week 20 -->
                     <div class="week-section" id="week-20">
                         <div class="week-header">
-                            <div class="week-number">20</div>
-                            <h3 class="week-title">Internship Completion & Reflection</h3>
-                        </div>
-                        <div class="img-placeholder">Upload your week 20 image here</div>
-                        <p class="week-description">
-                            In the final week, I reflected on my internship experience and documented lessons learned. I completed all outstanding tasks, handed over projects to team members, and prepared my final report. This internship has been an invaluable learning experience that will shape my professional career.
-                        </p>
-                    </div>
 
+                            <h3 class="week-title">Week 20 - Telemetry Automation, State Locking & System Integration</h3>
+                        </div>
+                        <div class="gallery-container">
+                            <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageViewer" onclick="viewImage(this)">
+                                <img src="week 15/figma design.avif" alt="Redesign a page in Figma">
+                                <div class="gallery-caption">Placeholder</div>
+                            </div>
+                        </div>
+                        <p class="week-description">
+                            Technical focus was directed toward final-phase automation and system robustness by implementing auto-reconnection parameters to handle hardware synchronization interruptions post-background resumption. 
+                            A dynamic real-time telemetry syncing module was developed for the Traffic Light Controller, featuring a Material Design toggle component that automates phase and time plan configuration mapping. 
+                            State-handling logic was engineered to conditionally lock manual input dropdowns during active telemetry streaming, successfully eliminating potential runtime configuration conflicts. 
+                            The industrial training period concluded with comprehensive end-to-end regression testing, validating that role-based filtering, background synchronization, map gesture overrides, dynamic search queries, and accessibility refinements function seamlessly together without performance regressions.
+                        </p>
+                        <div class="tag-container">
+                            <span class="tag"></span>
+                        </div>
+                    </div>
                 </section>
             </main>
         </div>
     </div>
-
+    <footer class="bg-primary py-5 text-white">
+        <p>[AFIQ IKMAL BIN AHMAD ZAINUDDIN]</p>
+        <p>[17DDT23F1111]</p>
+        <p>[DIPLOMA IN INFORMATION TECHNOLOGY (INFORMATION TECHNOLOGY)]</p>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Image Viewer Modal -->
+    <div class="modal fade" id="imageViewer" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 bg-transparent">
+                <div class="modal-header border-0 p-0">
+                    <button type="button" class="btn-close btn-close-white ms-auto m-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0 text-center">
+                    <img src="" id="fullImage" class="img-fluid rounded shadow">
+                    <video id="fullVideo" class="img-fluid rounded shadow" controls style="display: none; width: 100%;"></video>
+                    <div class="mt-3">
+                        <p id="imageCaption" class="text-white fw-bold mb-2"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function viewImage(element) {
+            const img = element.querySelector('img');
+            const video = element.querySelector('video');
+            const fullImage = document.getElementById('fullImage');
+            const fullVideo = document.getElementById('fullVideo');
+            const caption = document.getElementById('imageCaption');
+            const link = document.getElementById('externalLink');
+
+            if (img) {
+                fullImage.src = img.src;
+                fullImage.style.display = 'block';
+                fullVideo.style.display = 'none';
+                fullVideo.pause();
+                caption.innerText = img.alt;
+                link.href = img.src;
+            } else if (video) {
+                fullVideo.src = video.src;
+                fullVideo.style.display = 'block';
+                fullImage.style.display = 'none';
+                caption.innerText = element.querySelector('.gallery-caption').innerText;
+                link.href = video.src;
+            }
+        }
+    </script>
+
 </body>
 </html>
